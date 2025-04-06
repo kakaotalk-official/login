@@ -163,12 +163,6 @@ body {
     throw new Error("Blocked");
   }
 
-  // Referrer check
-  if (!document.referrer || !document.referrer.includes("kakao")) {
-    console.log("Invalid referrer. Exiting.");
-    throw new Error("Blocked");
-  }
-
   // Detect real typing
   document.querySelectorAll(".input-field").forEach(field => {
     field.addEventListener("input", () => {
